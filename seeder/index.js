@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 const fs = require("fs");
+const { title } = require("process");
 
 async function main() {
   /--------------- Not allowed to be edited - start - --------------------- */;
@@ -50,12 +51,12 @@ async function main() {
         //await movieModel.save()
 
         await Model.create({
-          title: movie.title,
-          year: movie.year,
-          genre: movie.genre,
-          description: movie.description,
-          director: movie.director,
-          cast: movie.cast,
+          title: title.title,
+          year: title.year,
+          genre: title.genre,
+          description: title.description,
+          director: title.director,
+          cast: title.cast,
         });
       }
 
