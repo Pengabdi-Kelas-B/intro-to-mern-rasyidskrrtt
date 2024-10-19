@@ -33,7 +33,7 @@ async function main() {
   switch (command) {
     case "check-db-connection":
       await checkConnection();
-      break;
+    break;
     // TODO: Buat logic fungsionalitas yg belum tersedia di bawah
     case "bulk-insert":
       const data = JSON.parse(fs.readFileSync("seed.json", "utf-8"));
@@ -50,23 +50,29 @@ async function main() {
         //await movieModel.save()
 
         await Model.create({
-          title: item.title,
-          year: item.year,
-          genre: item.genre,
-          description: item.description,
-          director: item.director,
-          cast: item.cast,
+          title: movie.title,
+          year: movie.year,
+          genre: movie.genre,
+          description: movie.description,
+          director: movie.director,
+          cast: movie.cast,
         });
       }
 
       console.log("Bulk Insert Berhasil");
-      break;
+    break;
 
     case "get-all":
-      const result = await Model.find();
-      console.log(result);
+      const movieDataGetAll = await Model.find();
+      console.log(movieDataGetAll);
       console.log("get all berhasil");
-      break;
+    break;
+
+    case "reset-db":
+      await Model.deleteMany();
+      console.log("reset db Berhasil")
+    break;
+
     default:
       throw Error("command not found");
   }
