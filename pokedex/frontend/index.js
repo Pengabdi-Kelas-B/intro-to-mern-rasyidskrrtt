@@ -5,7 +5,7 @@ async function fetchPokemon() {
   try {
     const response = await fetch("http://localhost:3000/pokemon");
     if (!response.ok) {
-      throw new Error("http call failed");
+      throw new Error("HTTP request failed");
     }
     const data = await response.json();
     pokemonData = data;
@@ -50,19 +50,19 @@ function PokemonCard(props) {
     "div",
     {
       className:
-        "bg-black border-2 border-red-600 rounded-lg shadow-xl p-4 m-2 text-center max-w-sm bg-opacity-90", // Card border in bright red
+        "bg-black border-2 border-red-600 rounded-lg shadow-lg p-4 m-2 text-center max-w-sm bg-opacity-90", // Card border in bright red
     },
     React.createElement("div", { className: "overflow-hidden mb-2" },
       React.createElement("img", {
         className:
-          "w-full max-h-32 object-contain transform transition-transform duration-300 hover:-translate-y-4",
+          "w-full max-h-32 object-contain transition-transform duration-300 hover:-translate-y-4", // Pokémon jumping effect on hover
         src: props.image,
         alt: props.name,
       })
     ),
     React.createElement(
       "h2",
-      { className: "text-2xl font-extrabold text-purple-600 mb-2 drop-shadow-lg" }, // Changed text color to purple
+      { className: "text-2xl font-extrabold text-purple-600 mb-2" }, // Pokémon name in purple
       props.name
     ),    
     React.createElement(
@@ -81,9 +81,7 @@ function PokemonCard(props) {
             "span",
             {
               key: type,
-              className: `inline-block px-3 py-1 text-sm font-bold text-gray-100 bg-${typeColor(type)}-500 shadow-neon-${typeColor(
-                type
-              )} hover:bg-${typeColor(type)}-700 transition duration-300 transform hover:scale-105`, // Solid color on hover
+              className: `inline-block px-3 py-1 text-sm font-bold text-gray-100 bg-${typeColor(type)}-500 hover:bg-${typeColor(type)}-700 transition-colors duration-300 transform hover:scale-105`, // Solid hover effect on type with slight scaling
             },
             type
           )
@@ -105,7 +103,7 @@ function PokemonList() {
 
   return React.createElement(
     "div",
-    { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-center" }, // Decreased gap
+    { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" }, // Closer card spacing for up to 5 cards per row
     pokemonData.map((pokemon) =>
       React.createElement(PokemonCard, {
         key: pokemon.id,
@@ -117,7 +115,7 @@ function PokemonList() {
   );
 }
 
-// App component wrap header and list with colors
+// App component wrapping the header and list with updated colors
 function App() {
   return React.createElement(
     "div",
@@ -127,11 +125,11 @@ function App() {
       { className: "mb-10 text-center" },
       React.createElement(
         "h1",
-        { className: "text-6xl font-extrabold text-purple-600 drop-shadow-lg" },
+        { className: "text-6xl font-extrabold text-purple-600 drop-shadow-lg" }, // Header text with shadow effect
         "Pokedex"
       ),
-      React.createElement("div", { className: "relative mt-4 mb-4" }, // Wrapper for the separator
-        React.createElement("div", { className: "absolute inset-0 border-t-2 border-red-600" }), // Bright red separator line
+      React.createElement("div", { className: "relative mt-6 mb-4" }, // Adjusted separator spacing
+        React.createElement("div", { className: "absolute inset-0 border-t-2 border-red-600" }), // Outer bright red separator line
         React.createElement("div", { className: "border-t-2 border-gray-600" }) // Inner separator line
       )
     ),
